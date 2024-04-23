@@ -6,7 +6,9 @@ export class Product {
         private _category: string,
         private _image: string,
         private _price: number,
-        private _description: string
+        private _description: string,
+        private _rating: number,
+        private _reviews: number
     ) {
     }
 
@@ -34,4 +36,11 @@ export class Product {
         return this._description;
     }
 
+    get rating(): number {
+        return this._rating;
+    }
+
+    get reviews(): number {
+        return this._reviews;
+    }
 }

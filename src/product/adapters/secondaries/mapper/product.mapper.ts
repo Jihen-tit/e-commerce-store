@@ -5,16 +5,20 @@ import { ProductBuilder } from "@/product/domain/entities/product.builder";
 export class ProductMapper {
 
     static mapDataToProducts(products: ProductDto[]): Product[] {
-        return products.map(item => {
+        return products.map(item => this.mapDataToProduct(item))
+    }
+
+    static mapDataToProduct(product: ProductDto): Product {
             return new ProductBuilder()
-                .withId(item.id.toString())
-                .withTitle(item.title)
-                .withDescription(item.description)
-                .withImage(item.image)
-                .withCategory(item.category)
-                .withPrice(item.price)
+                .withId(product.id.toString())
+                .withTitle(product.title)
+                .withDescription(product.description)
+                .withImage(product.image)
+                .withCategory(product.category)
+                .withPrice(product.price)
+                .withRating(product.rating.rate)
+                .withReviews(product.rating.count)
                 .build()
-        })
     }
 
 }

@@ -18,4 +18,14 @@ export class ApiProductService implements ProductService {
             )
     }
 
+    getProductById(productId: string): Observable<Product> {
+        console.log(productId)
+        const url = "https://fakestoreapi.com/products/" + productId
+        return ajax.getJSON<ProductDto>(url)
+            .pipe(
+                map((response: ProductDto) => ProductMapper.mapDataToProduct(response)),
+                catchError(err => throwError(err.status.toString()))
+            )
+    }
+
 }

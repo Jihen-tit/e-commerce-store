@@ -8,6 +8,8 @@ export class ProductBuilder {
     private _image!: string;
     private _price!: number;
     private _description!: string;
+    private _rating!: number;
+    private _reviews!: number;
 
     withId(value: string): ProductBuilder {
         this._id = value
@@ -38,6 +40,15 @@ export class ProductBuilder {
         this._price = value
         return this
     }
+    withRating(value: number): ProductBuilder {
+        this._rating = value
+        return this
+    }
+
+    withReviews(value: number): ProductBuilder {
+        this._reviews = value
+        return this
+    }
 
     build(): Product {
         return new Product(
@@ -46,7 +57,9 @@ export class ProductBuilder {
             this._category,
             this._image,
             this._price,
-            this._description
+            this._description,
+            this._rating,
+            this._reviews
         )
     }
 }
