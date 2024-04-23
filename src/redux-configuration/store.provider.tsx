@@ -1,7 +1,7 @@
 "use client";
 
-import { reduxStore } from "@/redux-configuration/store.redux";
 import { Provider } from "react-redux";
+import { reduxStore } from "@/redux-configuration/store.redux";
 
 export const store = reduxStore();
 

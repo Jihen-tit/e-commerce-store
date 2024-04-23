@@ -1,4 +1,3 @@
-
 import { LoadProductByIdState } from "@/product/config/state";
 import { LOAD_PRODUCT_BY_ID, LOAD_PRODUCT_BY_ID_FAILED, LOAD_PRODUCT_BY_ID_SUCCEEDED, LoadProductByIdActionTypes } from "@/product/usecases/details/actionTypes";
 

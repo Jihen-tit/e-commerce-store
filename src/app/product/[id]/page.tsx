@@ -2,19 +2,20 @@
 
 import react, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
 
 import { AppState } from "@/redux-configuration/appState";
-import { productDetailsSelector } from "@/product/usecases/details/selectors";
+import { loadProductByIdErrorSelector, loadProductByIdLoadingSelector, productDetailsSelector } from "@/product/usecases/details/selectors";
 import { loadProductById } from "@/product/usecases/details/actions";
-import { ProductCard } from "@/product/adapters/primaries/components/product.card";
-import Image from "next/image";
 import { ProductRating } from "@/product/adapters/primaries/components/rating";
-import { addProductToCart } from "@/product/usecases/addToCart/actions";
-
+import { addProductToCart } from "@/product/usecases/cart/actions";
 
 export default function ProductDetails({params}: { params: { id: string } }) {
 
     const dispatch = useDispatch()
+
+    const loading = useSelector((state: AppState) => loadProductByIdLoadingSelector(state))
+    const error = useSelector((state: AppState) => loadProductByIdErrorSelector(state))
     const product = useSelector((state: AppState) => productDetailsSelector(state))
 
     const productId = params.id
@@ -23,9 +24,11 @@ export default function ProductDetails({params}: { params: { id: string } }) {
         if (productId) {
             dispatch(loadProductById(productId))
         }
-    }, [dispatch])
+    }, [dispatch, productId])
 
-    if (product) {
+    if (loading) {
+        return <p className="text-center font-bold my-24">Loading...</p>
+    } else if (product) {
         return (
             <main className="min-h-screen p-24">
                 <div className="w-full max-w-5xl">
@@ -49,5 +52,9 @@ export default function ProductDetails({params}: { params: { id: string } }) {
                 </div>
             </main>
         );
+    } else if (error) {
+        return <p className="text-center font-bold my-24">Product Not found</p>
+    } else {
+        return <></>
     }
 }

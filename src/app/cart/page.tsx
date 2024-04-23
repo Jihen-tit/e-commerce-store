@@ -1,23 +1,18 @@
 "use client";
 
-import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { AppState } from "@/redux-configuration/appState";
+
 import { productsSelector } from "@/product/usecases/list/selectors";
-import { ProductCard } from "@/product/adapters/primaries/components/product.card";
-import { categorySelector } from "@/category/usecases/setCategory/selectors";
-import { Product } from "@/product/domain/entities/product";
-import { selectedProductsSelector } from "@/product/usecases/addToCart/selectors";
-import { element } from "prop-types";
-import { Banner } from "@/components/Banner/Banner";
+import { productsInCartSelector } from "@/product/usecases/cart/selectors";
 import { ProductWithQuantityCard } from "@/product/adapters/primaries/components/productWithQuantity.card";
+import { Banner } from "@/components/Banner/Banner";
 
 export default function CartPage() {
 
     const dispatch = useDispatch()
 
-    const cart = useSelector((state: AppState) => selectedProductsSelector(state))
+    const cart = useSelector((state: AppState) => productsInCartSelector(state))
     const products = useSelector((state: AppState) => productsSelector(state))
 
     let price = 0
@@ -27,7 +22,7 @@ export default function CartPage() {
             <Banner title="Votre panier"/>
 
             <div className="w-full max-w-7xl p-24 mx-auto">
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 gap-6">
                     {cart.map(item => {
                         const foundProduct = products?.find(element => element.id === item.productId)
                         if (foundProduct) {

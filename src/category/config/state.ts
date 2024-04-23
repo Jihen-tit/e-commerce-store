@@ -1,6 +1,6 @@
 export interface CategoryState {
     list: LoadAllCategoriesState;
-    category: string;
+    selectedCategory: string;
 }
 
 export interface LoadAllCategoriesState {

@@ -5,7 +5,7 @@ import {
 import { Product } from "@/product/domain/entities/product";
 
 export const loadProductById = (productId: string): LoadProductByIdAction => ({
-    type: LOAD_PRODUCT_BY_ID,
+    type   : LOAD_PRODUCT_BY_ID,
     payload: productId
 })
 

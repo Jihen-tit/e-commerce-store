@@ -8,8 +8,8 @@ import { loadAllCategoriesFailed, loadAllCategoriesSucceeded } from "@/category/
 import { CategoryService } from "@/category/domain/gateway/category.service";
 
 export const loadAllCategoriesEpic: Epic = (action$: Observable<LoadAllCategoriesAction>,
-                                       store: StateObservable<AppState>,
-                                       {categoryService}: { categoryService: CategoryService }) =>
+                                            store: StateObservable<AppState>,
+                                            {categoryService}: { categoryService: CategoryService }) =>
     action$.pipe(
         ofType(LOAD_ALL_CATEGORIES),
         switchMap(() => categoryService.getAllCategories()

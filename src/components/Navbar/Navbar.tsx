@@ -1,15 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "@/redux-configuration/appState";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { AppState } from "@/redux-configuration/appState";
 import { loadAllCategories } from "@/category/usecases/list/actions";
 import { allCategoriesSelector } from "@/category/usecases/list/selectors";
-import { useRouter } from "next/navigation";
 import { setCategory } from "@/category/usecases/setCategory/actions";
-import Link from "next/link";
-import { selectedProductsSelector } from "@/product/usecases/addToCart/selectors";
+import { productsInCartSelector } from "@/product/usecases/cart/selectors";
 
 export const Navbar = () => {
 
@@ -17,7 +18,7 @@ export const Navbar = () => {
     const dispatch = useDispatch()
 
     const categories = useSelector((state: AppState) => allCategoriesSelector(state))
-    const cart = useSelector((state: AppState) => selectedProductsSelector(state))
+    const cart = useSelector((state: AppState) => productsInCartSelector(state))
 
     useEffect(() => {
         dispatch(loadAllCategories())
@@ -29,7 +30,7 @@ export const Navbar = () => {
     }
 
     return (
-        <nav className="">
+        <nav className="sticky w-full top-0 bg-white shadow-2xl">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

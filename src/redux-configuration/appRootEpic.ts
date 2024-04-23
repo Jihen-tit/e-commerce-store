@@ -1,4 +1,5 @@
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
+
 import { productRootEpic } from "@/product/config/rootEpic";
 import { productEpicDependencies } from "@/product/config/epic.dependencies";
 import { categoryRootEpic } from "@/category/config/rootEpic";

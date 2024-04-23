@@ -1,5 +1,6 @@
-import { type AppState } from "@/redux-configuration/appState";
 import { configureStore, Store } from "@reduxjs/toolkit";
+
+import { type AppState } from "@/redux-configuration/appState";
 import { appRootReducer } from "@/redux-configuration/appRootReducer";
 import { appRootEpic, epicsMiddleware } from "@/redux-configuration/appRootEpic";
 

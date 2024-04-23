@@ -8,8 +8,8 @@ import { LOAD_PRODUCT_BY_ID, LoadProductByIdAction } from "@/product/usecases/de
 import { loadProductByIdFailed, loadProductByIdSucceeded } from "@/product/usecases/details/actions";
 
 export const loadProductByIdEpic: Epic = (action$: Observable<LoadProductByIdAction>,
-                                       store: StateObservable<AppState>,
-                                       {productService}: { productService: ProductService }) =>
+                                          store: StateObservable<AppState>,
+                                          {productService}: { productService: ProductService }) =>
     action$.pipe(
         ofType(LOAD_PRODUCT_BY_ID),
         switchMap((action) => productService.getProductById(action.payload)

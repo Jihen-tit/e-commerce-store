@@ -4,7 +4,7 @@ import { ProductCart } from "@/product/domain/entities/cart";
 export interface ProductState {
     list: LoadProductsState;
     details: LoadProductByIdState;
-    selectedProducts: ProductCart[];
+    productsInCart: ProductCart[];
 }
 
 export interface LoadProductsState {
