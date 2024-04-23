@@ -15,8 +15,9 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
     return (
         <html lang="en">
             <body className={inter.className}>
-                <Navbar/>
                 <StoreProvider>
+                    <Navbar/>
+
                     {children}
                 </StoreProvider>
             </body>

@@ -8,7 +8,7 @@ import { loadProducts } from "@/product/usecases/list/actions";
 import { productsSelector } from "@/product/usecases/list/selectors";
 import { ProductCard } from "@/product/adapters/primaries/components/product.card";
 
-export default function Home() {
+export default function ProductsByCategories() {
 
     const dispatch = useDispatch()
     const products = useSelector((state: AppState) => productsSelector(state))
