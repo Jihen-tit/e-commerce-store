@@ -5,16 +5,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "@/redux-configuration/appState";
 import { useEffect } from "react";
 import { loadAllCategories } from "@/category/usecases/list/actions";
-import { categoriesSelector } from "@/category/usecases/list/selectors";
+import { allCategoriesSelector } from "@/category/usecases/list/selectors";
+import { useRouter } from "next/navigation";
+import { setCategory } from "@/category/usecases/setCategory/actions";
 import Link from "next/link";
 
 export const Navbar = () => {
+
+    const router = useRouter();
     const dispatch = useDispatch()
-    const categories = useSelector((state: AppState) => categoriesSelector(state))
+
+    const categories = useSelector((state: AppState) => allCategoriesSelector(state))
 
     useEffect(() => {
         dispatch(loadAllCategories())
-    }, [])
+    }, [dispatch])
+
+    const onClick = (category: string) => {
+        dispatch(setCategory(category))
+        router.push(`/category/${category}`);
+    }
 
     return(
         <nav className="bg-gray-800">
@@ -39,15 +49,14 @@ export const Navbar = () => {
                         </button>
                     </div>
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                        <div className="flex flex-shrink-0 items-center">
+                        <Link href="/" className="flex flex-shrink-0 items-center">
                             <Image width={40} height={20} className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg" alt="E-commerce store"/>
-                        </div>
+                        </Link>
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-4">
                                 {categories && categories.map(cat =>
-                                    <Link href={"/category/" + cat} key={cat}
-                                          className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{cat}</Link>)}
-
+                                    <button onClick={() => onClick(cat)} key={cat}
+                                            className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{cat}</button>)}
                             </div>
                         </div>
                     </div>

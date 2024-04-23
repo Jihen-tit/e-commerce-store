@@ -14,8 +14,10 @@ export default function Home() {
     const products = useSelector((state: AppState) => productsSelector(state))
 
     useEffect(() => {
-        dispatch(loadProducts())
-    }, [])
+        if (!products) {
+            dispatch(loadProducts())
+        }
+    }, [dispatch, products])
 
     return (
         <main className="min-h-screen p-24">

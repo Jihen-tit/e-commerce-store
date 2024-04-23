@@ -1,20 +1,28 @@
 "use client";
 
-import react, { useEffect } from "react";
+import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AppState } from "@/redux-configuration/appState";
-import { loadProducts } from "@/product/usecases/list/actions";
 import { productsSelector } from "@/product/usecases/list/selectors";
 import { ProductCard } from "@/product/adapters/primaries/components/product.card";
+import { categorySelector } from "@/category/usecases/setCategory/selectors";
+import { Product } from "@/product/domain/entities/product";
 
 export default function ProductsByCategories() {
 
     const dispatch = useDispatch()
+
+    const category = useSelector((state: AppState) => categorySelector(state))
     const products = useSelector((state: AppState) => productsSelector(state))
 
+    const [productsByCategory, setProductsByCategory] = useState<Product[]>([])
+
     useEffect(() => {
-        dispatch(loadProducts())
+        if (category.length > 0 && products) {
+            const data = products.filter(item => item.category === category)
+            setProductsByCategory(data)
+        }
     }, [])
 
     return (
@@ -23,7 +31,7 @@ export default function ProductsByCategories() {
                 <h1 className={"mb-12"}>Product list</h1>
 
                 <div className="grid grid-cols-4 gap-4">
-                    {products && products.map(item => <ProductCard key={item.id} product={item}/>)}
+                    {productsByCategory.map(item => <ProductCard key={item.id} product={item}/>)}
                 </div>
             </div>
         </main>

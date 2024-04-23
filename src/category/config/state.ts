@@ -1,5 +1,6 @@
 export interface CategoryState {
     list: LoadAllCategoriesState;
+    category: string;
 }
 
 export interface LoadAllCategoriesState {
