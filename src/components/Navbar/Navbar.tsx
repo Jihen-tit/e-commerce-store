@@ -9,6 +9,7 @@ import { allCategoriesSelector } from "@/category/usecases/list/selectors";
 import { useRouter } from "next/navigation";
 import { setCategory } from "@/category/usecases/setCategory/actions";
 import Link from "next/link";
+import { selectedProductsSelector } from "@/product/usecases/addToCart/selectors";
 
 export const Navbar = () => {
 
@@ -16,6 +17,7 @@ export const Navbar = () => {
     const dispatch = useDispatch()
 
     const categories = useSelector((state: AppState) => allCategoriesSelector(state))
+    const cart = useSelector((state: AppState) => selectedProductsSelector(state))
 
     useEffect(() => {
         dispatch(loadAllCategories())
@@ -27,7 +29,7 @@ export const Navbar = () => {
     }
 
     return (
-        <nav className="bg-gray-800">
+        <nav className="">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -57,14 +59,14 @@ export const Navbar = () => {
                             <div className="flex space-x-4">
                                 {categories && categories.map(cat =>
                                     <button onClick={() => onClick(cat)} key={cat}
-                                            className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{cat}</button>)}
+                                            className="hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{cat}</button>)}
                             </div>
                         </div>
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <Link href="/cart"
                               className="relative rounded-lg bg-gray-900 p-3 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                            cart
+                            cart <span className="text-sm">({cart.length})</span>
                         </Link>
                     </div>
                 </div>

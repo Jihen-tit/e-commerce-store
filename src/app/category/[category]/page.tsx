@@ -8,6 +8,7 @@ import { productsSelector } from "@/product/usecases/list/selectors";
 import { ProductCard } from "@/product/adapters/primaries/components/product.card";
 import { categorySelector } from "@/category/usecases/setCategory/selectors";
 import { Product } from "@/product/domain/entities/product";
+import { Banner } from "@/components/Banner/Banner";
 
 export default function ProductsByCategories() {
 
@@ -26,10 +27,10 @@ export default function ProductsByCategories() {
     }, [])
 
     return (
-        <main className="min-h-screen p-24">
-            <div className="w-full max-w-5xl">
-                <h1 className={"mb-12"}>Product list</h1>
+        <main className="min-h-screen">
+            <Banner title={category}/>
 
+            <div className="w-full max-w-7xl p-24 mx-auto">
                 <div className="grid grid-cols-4 gap-4">
                     {productsByCategory.map(item => <ProductCard key={item.id} product={item}/>)}
                 </div>

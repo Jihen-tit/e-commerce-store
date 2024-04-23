@@ -9,6 +9,7 @@ import { loadProductById } from "@/product/usecases/details/actions";
 import { ProductCard } from "@/product/adapters/primaries/components/product.card";
 import Image from "next/image";
 import { ProductRating } from "@/product/adapters/primaries/components/rating";
+import { addProductToCart } from "@/product/usecases/addToCart/actions";
 
 
 export default function ProductDetails({params}: { params: { id: string } }) {
@@ -40,7 +41,9 @@ export default function ProductDetails({params}: { params: { id: string } }) {
                             <p className="text-gray-700 text-base my-3">{product.reviews} reviews</p>
                             <h2 className="font-medium mb-4 text-md">Description</h2>
                             <p className="text-sm">{product?.description}</p>
-                            <button className="text-white bg-blue-700 w-full rounded-lg p-3 mt-12">Add to cart</button>
+                            <button className="text-white bg-blue-700 w-full rounded-lg p-3 mt-12"
+                                    onClick={() => dispatch(addProductToCart(productId, 1))}>Add to cart
+                            </button>
                         </div>
                     </div>
                 </div>

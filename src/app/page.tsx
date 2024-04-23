@@ -7,6 +7,7 @@ import { AppState } from "@/redux-configuration/appState";
 import { loadProducts } from "@/product/usecases/list/actions";
 import { productsSelector } from "@/product/usecases/list/selectors";
 import { ProductCard } from "@/product/adapters/primaries/components/product.card";
+import { Banner } from "@/components/Banner/Banner";
 
 export default function Home() {
 
@@ -20,10 +21,10 @@ export default function Home() {
     }, [dispatch, products])
 
     return (
-        <main className="min-h-screen p-24">
-            <div className="w-full max-w-5xl">
-                <h1 className={"mb-12"}>Product list</h1>
+        <main className="min-h-screen">
+            <Banner title="Tous les produits"/>
 
+            <div className="w-full max-w-7xl p-24 mx-auto">
                 <div className="grid grid-cols-4 gap-4">
                     {products && products.map(item => <ProductCard key={item.id} product={item}/>)}
                 </div>

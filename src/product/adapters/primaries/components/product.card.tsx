@@ -10,7 +10,7 @@ export const ProductCard = (props: { product: Product }) => {
             <div className="max-w-sm rounded overflow-hidden shadow-lg p-4">
                 <Image width={200} height={200} src={props.product.image} alt={props.product.title}/>
                 <div className="py-3 text-center">
-                    <div className="font-bold text-lg mb-2">{props.product.title}</div>
+                    <h2 className="font-bold text-lg mb-2">{props.product.title}</h2>
                     <ProductRating rating={props.product.rating}/>
                     <p className="text-gray-700 text-base my-3">{props.product.reviews} reviews</p>
                     <span className="text-sm font-semibold">{props.product.price} €</span>
